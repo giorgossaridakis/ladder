@@ -1,0 +1,7 @@
+Ladder 1.31 cloned with Borland C++ 5.5
+
+differences
+-----------
+p is key for pause in the game
+ESC brings back the startup screen
++ or - adds or substracts time delay, making game slower or faster
