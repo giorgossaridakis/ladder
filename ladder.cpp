@@ -325,6 +325,8 @@ while (1) {
     if (screen[player.pt.x][player.pt.y]!=LADDER && !(screen[player.pt.x][player.pt.y+1]) && !jump_counter) {
 	 player.pt.y++;
 	player.direction.y=0; } 
+    if (screen[player.pt.x][player.pt.y]==FLOOR)
+     player.pt.y--;		
 	/* is asterisk, gift or money below player ? he must descend */
 	if (screen[player.pt.x][player.pt.y+1]==ASTERISK || screen[player.pt.x][player.pt.y+1]==GIFT || screen[player.pt.x][player.pt.y+1]==MONEY) 
 	 player.pt.y++;
@@ -349,10 +351,15 @@ while (1) {
      player.direction.x=0; }
 	 if (screen[player.pt.x][player.pt.y+player.direction.y]!=LADDER && screen[player.pt.x][player.pt.y+player.direction.y]!=MONEY)
 	player.direction.y=0; }
+     /* has player stepped on a sign ? */
+	 if (screen[player.pt.x][player.pt.y+1]==SIGN) {
+	   n=rand() % 2;
+	  player.direction.x=!n ? -1 : 1; }
     /* reduce jump counter if necessary and give extra x movement */
      if (jump_counter && screen[player.pt.x][player.pt.y]==LADDER) {
-	  jump_counter=0;
-     player.direction.x=0; }
+	  jump_counter=0; 
+	  player.direction.y=0;
+     player.direction.x=0; }  
 	 if (jump_counter) {
 	 if (!screen[player.pt.x][player.pt.y+jump_sequence[jump_counter-1]])  
 	  player.pt.y+=jump_sequence[jump_counter-1];
